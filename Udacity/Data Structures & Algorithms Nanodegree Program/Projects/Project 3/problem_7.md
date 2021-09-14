@@ -1,0 +1,5 @@
+# Problem 7
+
+The `RouteTrieNode` stores the route and the handler, being responsible to create new nodes and add handlers to each of them. `RouteTrie` is responsible for calling `RouteTrieNode` and inserting new routes. It is also responsible to get the children from a node and find the correspondent handler, if it exists. If the handler does not exist, `RouteTrie` returns the not found handler. Finally, the `Router` is responsible to set the `RouteTrie` with the correct root handler and not found handler.
+ 
+Overall, taking into account that `n` are the parts of a route (e.g. `/home/create/` has two parts: `home` and `create`), the `Router` takes `O(n)` time and `O(n)` space complexity to insert new route handlers into the trie node. To look up a route, it also takes `O(n)` time, but without having to create new variables while finding the handler, which makes it `O(1)` space complexity.

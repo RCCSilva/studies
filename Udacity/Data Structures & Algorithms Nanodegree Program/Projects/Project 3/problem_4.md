@@ -1,0 +1,3 @@
+# Problem 4
+
+The algorithm starts by setting the indexes of where the number 0 and 2 should be if they are found at the transversal. If `0` or `2` are found while the loop is scanning the values of the array, these values are swapped with the indexes of where they should be placed. Thus, we are able to swap the necessary values in a single transversal in `O(n)` time complexity and `O(1)` space complexity, given `n` as the array size.

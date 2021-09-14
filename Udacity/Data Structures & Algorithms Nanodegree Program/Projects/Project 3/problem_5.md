@@ -1,0 +1,3 @@
+# Problem 5
+
+Each `TrieNode` holds the char and the children nodes. The node is responsible to insert and to return the suffixes. The `Trie` stores the root node and is responsible for finding the node given a prefix. Taking into account that `n` is the size of the input string, the algorithm to insert new words takes `O(n)` time and `O(n)` space. To find a node it takes `O(n)` time complexity to run though the tree and `O(n)` space to build the strings.

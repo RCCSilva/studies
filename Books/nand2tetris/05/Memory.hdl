@@ -1,0 +1,50 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/05/Memory.hdl
+
+/**
+ * The complete address space of the Hack computer's memory,
+ * including RAM and memory-mapped I/O. 
+ * The chip facilitates read and write operations, as follows:
+ *     Read:  out(t) = Memory[address(t)](t)
+ *     Write: if load(t-1) then Memory[address(t-1)](t) = in(t-1)
+ * In words: the chip always outputs the value stored at the memory 
+ * location specified by address. If load==1, the in value is loaded 
+ * into the memory location specified by address. This value becomes 
+ * available through the out output from the next time step onward.
+ * Address space rules:
+ * Only the upper 16K+8K+1 words of the Memory chip are used. 
+ * Access to address>0x6000 is invalid. Access to any address in 
+ * the range 0x4000-0x5FFF results in accessing the screen memory 
+ * map. Access to address 0x6000 results in accessing the keyboard 
+ * memory map. The behavior in these addresses is described in the 
+ * Screen and Keyboard chip specifications given in the book.
+ */
+
+CHIP Memory {
+    IN in[16], load, address[15];
+    OUT out[16];
+
+    PARTS:
+    // if address[14] == 1: load8k else: load 16k 
+    DMux(in=load, sel=address[14], a=load16k, b=load8k); 
+    RAM16K(in=in, load=load16k, address=address[0..13], out=out16k);
+
+    // Handles if it's a 8K address or the single register
+    DMux(in=load8k, sel=address[13], a=load8kf, b=maybeloadregister);
+    Screen(in=in, load=load8kf, address=address[0..12], out=out8k);
+
+    // if 0, means that the remaning bus was of 0, thus it is a valid
+    // keyboard memory address, else it's invalid ant we'll do nothing with it
+    Or16Way(in[0..12]=address[0..12], out=rightBusIsNot0); // Right from 14 and 15th pins are not 0s
+    Not(in=rightBusIsNot0, out=rightbusIs0);
+    And(a=address[13], b=address[14], out=leftBustIs1); // 13 and 14th pins are equat to 0
+    And(a=leftBustIs1, b=rightbusIs0, out=isKeyboardAddr);
+    // If or16way == 0 and or8way == 1, we have a valid keyboard address
+
+    Keyboard(out=outKeyboard);
+
+    Mux16(a=out16k, b=out8k, sel=address[14], out=out16k8k);
+    Mux16(a=out16k8k, b=outKeyboard, sel=isKeyboardAddr, out=out);
+}

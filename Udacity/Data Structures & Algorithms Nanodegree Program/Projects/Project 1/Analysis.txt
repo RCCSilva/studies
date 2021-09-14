@@ -1,0 +1,44 @@
+# Task 0
+
+The run time of "print_info" procedure is is O(1) and memory use is also O(1).
+That is because the we call constantly access the size of lists in Python. So we
+can fetch the first and last records of a list using, for example, `my_list[0]`
+to fetch the first value and `my_list[len(my_list) - 1]` to fetch the last. 
+
+# Task 1
+
+Given that N is the number of calls and M is the number of texts, the run time of 
+"print_unique_phone_numbers" is O(n), given that we'll have to run though both 
+data sets before returning the amount of unique phone numbers. The memory use will
+also be O(n), since that in the worst case, we'll need to store every single 
+phone number from "calls" and "texts" inside "phones_set".
+
+# Task 2
+
+"print_longest_call" procedure will always run though each call record. 
+Thus, the run time is O(n). Regarding the memory, the use will be constant O(1),
+given that we'll only have "lci", "lct", "i", "call" and "call_time" variables 
+while it's running.
+
+# Task 3
+
+## Part A
+
+The run time of "print_numbers_called_by_bangalore" is O(n logn). Even though we have a for loop 
+running with O(n), we have to sort the phone number prefixes before printing them. And sorting has 
+a run time of O(n logn)*. In the worst case scenario, where all phone calls are from Bangalore the 
+memory use will also be O(n).
+
+## Part B
+
+Since we have to run though all records, the run time of "print_percentage_called_bangalore"
+procedure is O(n). The memory use is constant O(1), since we only update "bangalore_from"
+and "bangalore_to" variables in each iteration.
+
+# Task 4
+
+The run time of "get_possible_marketeers" is O(n logn), since we have to sort the phone numbers. 
+The memory use is O(n), fallowing the size of the data sets "calls" and "texts".
+
+
+*Algorithm used in Python: https://en.wikipedia.org/wiki/Timsort

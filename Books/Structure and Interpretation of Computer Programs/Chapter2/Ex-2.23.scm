@@ -1,0 +1,6 @@
+(define (for-each proc list-input)
+    (define (iter things)
+        (proc (car things))
+        (if (not (null? (cdr things)))
+            (iter (cdr things))))
+    (iter list-input))

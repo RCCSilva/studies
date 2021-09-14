@@ -1,0 +1,12 @@
+(define (even? a)
+    (= (remainder a 2) 0))
+
+(define (same-parity x . l)
+    (let ((parity-of-the-first (even? x)))
+        (define (iter-parity list-iter)
+            (if (null? list-iter)
+                (list )
+                (if (equal? (even? (car list-iter)) parity-of-the-first)
+                    (append (list (car list-iter)) (iter-parity (cdr list-iter)))
+                    (append (list ) (iter-parity (cdr list-iter))))))
+        (iter-parity l)))

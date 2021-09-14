@@ -1,0 +1,3 @@
+# Problem 3
+
+We start by sorting the original array using a merge sort approach. Then, the algorithm takes this list and stores the values one by one in two lists. These two lists are then converted to integers and returned by the function. Given `n` as the size of the array, the time complexity of this approach is `O(n logn)`, since we have to sort the array. The call stack of the merge sort is `log n` size, but the space complexity of sorting and creating the two new arrays are `O(n)`, which leads to an overall space complexity of `O(n)`.

@@ -1,0 +1,3 @@
+# Problem 2
+
+The algorithm starts by finding the pivot. Once it does, it splits the original rotated array into two sorted arrays. Since they are already sorted, it applies a simple binary search to find the target number. Taking into account that `n` is the size of the array, to find the pivot and the target number, the algorithm takes `O(log n)`, using the split and conquer approach. The space complexity is `O(n)`, given that by slicing an array we copy the references to the values.
